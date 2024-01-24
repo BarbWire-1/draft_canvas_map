@@ -1,4 +1,4 @@
-export const pathsArray = [
+export const pathsStringArray = [
   `//#path616
     ctx.fillStyle = 'rgb(0, 128, 128)';
     ctx.lineWidth = 0.800000;

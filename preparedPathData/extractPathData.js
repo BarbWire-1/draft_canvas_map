@@ -1,4 +1,7 @@
-import { pathsArray } from './pathsStringArray.js';
+// This shall NOT run when running the app but is only meant to prepare the pathData from string to dataObject!!!!
+
+
+import { pathsStringArray } from './pathsStringArray.js';
 
 
 // // REGEX example with string.match(regex)
@@ -88,10 +91,11 @@ const extractPathData = (code) => {
         }
     }
 
-
-    return pathData;
+console.log("Creating a new pathData-array.")
 
 }
+
+
 export function downloadJSON(data, filename = 'convertedPath.json') {
 	const jsonString = JSON.stringify(data, null, 2);
 	const blob = new Blob([jsonString], { type: 'application/json' });
@@ -106,5 +110,19 @@ export function downloadJSON(data, filename = 'convertedPath.json') {
 	document.body.removeChild(link);
 }
 
-export const pathData = pathsArray.map(extractPathData);
-//downloadJSON(pathData)
+
+function createNewPathDataObject(stringArray) {
+    const pathData = stringArray.map(extractPathData);
+    downloadJSON(pathData)
+}
+
+// If you want to add new paths, you need to append the canvas commands for the new paths to the array in pathsStringArray.js
+// Then run this function:
+//❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️
+//createNewPathDataObject(pathsStringArray)
+
+/* That creates the new array and a new JSON to download.
+Copy the JSON object's content and go to map/convertedPaths.js then overwrite the content of the exported array "paths" with the new Array by pasting it.
+
+ClientSide it is NOT possible to store changes (hardcoded) but later you might have a storage server-side to just append new stuff which now needs to be done partially manually.
+*/
