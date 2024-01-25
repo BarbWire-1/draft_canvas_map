@@ -1,40 +1,54 @@
-import { TheMap } from "./map/Map.js";
-import { paths } from "./map/convertedPaths.js";
+import { TheMap } from './map/Map.js';
+import { paths } from './map/convertedPaths.js';
 
-import { downloadJSON } from "./preparedPathData/extractPathData.js"; // go to this file an run downloadJson when appended a new Ara to the pathsStringArray
+/*❗️❗️ Run this function to dynamically create and downlowd a new JSON from the paths string array.
+It dynamically imports the file and immediately executes the function for generating, stringifying and downloading.
+Then copy the json-content into the paths array in ./map/convertedPaths.js
+*/
+async function createNewJSON() {
+    let test = await import('./preparedPathData/extractPathData.js')
+}
+//createNewJSON();
 
-const map = new TheMap("canvas", 1800, 1800);
+
+
+const map = new TheMap('canvas', 1800, 1800);
 map.addAreas(paths);
 
 const firstMap = map.areas[0];
-firstMap.fillStyle = "blue";
+firstMap.fillStyle = 'blue';
 firstMap.globalAlpha = 0.3;
-map.areas[0].strokeStyle = "limegreen";
+map.areas[0].strokeStyle = 'limegreen';
 map.areas[0].lineWidth = 5;
 
-console.log("Script loaded successfully");
+console.log('Script loaded successfully');
 
-// JUST FOR NOE TO CHECK ANIMATION AS NOTHING REALLY MOVES
+// JUST FOR NOW TO CHECK ANIMATION AS NOTHING REALLY MOVES
 // Global functions to start and stop animation
 function startAnimation() {
-  console.log("startAnimation called");
-  map.startAnimation();
+	console.log('startAnimation called');
+	map.startAnimation();
 }
 
 function stopAnimation() {
-  console.log("stopAnimation called");
-  map.stopAnimation();
+	console.log('stopAnimation called');
+	map.stopAnimation();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const startButton = document.getElementById("startButton");
-  const stopButton = document.getElementById("stopButton");
+document.addEventListener('click', (e) => {
+	const buttons = document.getElementsByTagName('button');
 
-  startButton.addEventListener("click", startAnimation);
-  stopButton.addEventListener("click", stopAnimation);
+	switch (e.target) {
+		case buttons[0]:
+			startAnimation();
+			break;
+		case buttons[1]:
+			stopAnimation();
+			break;
+		default:
+			break;
+	}
 });
-
-//map.stopAnimation();
 
 /*
 Hi Stefan have a look at preparedPathData/extractPathData.js

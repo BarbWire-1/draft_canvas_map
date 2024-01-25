@@ -96,7 +96,7 @@ console.log("Creating a new pathData-array.")
 }
 
 
-export function downloadJSON(data, filename = 'convertedPath.json') {
+export function downloadJSON(data, filename = 'convertedPaths.json') {
 	const jsonString = JSON.stringify(data, null, 2);
 	const blob = new Blob([jsonString], { type: 'application/json' });
 	const link = document.createElement('a');
@@ -111,16 +111,17 @@ export function downloadJSON(data, filename = 'convertedPath.json') {
 }
 
 
-function createNewPathDataObject(stringArray) {
+export function createNewPathDataObject(stringArray) {
     const pathData = stringArray.map(extractPathData);
     downloadJSON(pathData)
 }
 
-// If you want to add new paths, you need to append the canvas commands for the new paths to the array in pathsStringArray.js
+//If you want to add new paths, you need to append the canvas commands for the new paths to the array in pathsStringArray.js
 // Then run this function:
 //❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️❗️
-//createNewPathDataObject(pathsStringArray)
-
+(() => {
+    createNewPathDataObject(pathsStringArray)
+})();//IIFE
 /* That creates the new array and a new JSON to download.
 Copy the JSON object's content and go to map/convertedPaths.js then overwrite the content of the exported array "paths" with the new Array by pasting it.
 
