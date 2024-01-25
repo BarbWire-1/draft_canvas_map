@@ -46,16 +46,21 @@ export class TheMap {
 		}
 	}
 
-	animate() {
-		const { width, height } = this.ctx.canvas;
-		this.ctx.clearRect(0, 0, width, height);
-		// Perform any animations or updates here
-
-		//console.log('animating');
+    updateMap() {
+        const { width, height } = this.ctx.canvas;
+        this.ctx.clearRect(0, 0, width, height);
+        //console.log('animating');
 		this.redrawAreas();
+    }
+    
+    // Perform any animations or updates here - could rather be in another class controlling the entire game later
+	animate() {
+
+        this.updateMap()
 		this.animationId = requestAnimationFrame(() => this.animate());
 	}
 
+    // LISTENER AND HANDLER
 	setupClickListener() {
 		this.canvas.addEventListener('click', (event) => {
 			const mouseX =
