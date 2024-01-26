@@ -1,22 +1,24 @@
 import { TheMap } from "./map/Map.js";
 import { paths } from "./map/convertedPaths.js";
 
-/*❗️❗️ Run this function to dynamically create and downlowd a new JSON from the paths string array.
+import './preparedPathData/extractPathData.js';
+
+/*❗️❗️ Run this function to dynamically create and download a new JSON from the paths string array.
 It dynamically imports the file and immediately executes the function for generating, stringifying and downloading.
 Then copy the json-content into the paths array in ./map/convertedPaths.js
 */
-async function createNewJSON() {
-    try {
-        await import("./preparedPathData/extractPathData.js");
-        console.log("New JSON ready to download");
-    } catch (error) {
-        console.error("Error during import:", error);
-        // Handle the error as needed
-    }
-}
+// async function createNewJSON() {
+//     try {
+//         await import("./preparedPathData/extractPathData.js");
+//         console.log("New JSON ready to download");
+//     } catch (error) {
+//         console.error("Error during import:", error);
+//         // Handle the error as needed
+//     }
+// }
 
 //createNewJSON();
-
+//downloadJSON()
 
 const map = new TheMap("canvas", 1800, 1800);
 map.addAreas(paths);

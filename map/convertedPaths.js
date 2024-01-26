@@ -1214,11 +1214,37 @@ export const paths=[
       },
       {
         "type": "bezier",
-        "controlPoints": []
+        "controlPoints": [
+          {
+            "x": 281.875,
+            "y": 433.75
+          },
+          {
+            "x": 283,
+            "y": 433.75
+          },
+          {
+            "x": 281.5,
+            "y": 436
+          }
+        ]
       },
       {
         "type": "bezier",
-        "controlPoints": []
+        "controlPoints": [
+          {
+            "x": 280,
+            "y": 438.25
+          },
+          {
+            "x": 271,
+            "y": 441.75
+          },
+          {
+            "x": 271,
+            "y": 441.75
+          }
+        ]
       },
       {
         "x": 268,

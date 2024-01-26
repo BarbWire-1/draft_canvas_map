@@ -159,7 +159,6 @@ export const pathsStringArray = [
     ctx.fill();
     ctx.stroke();
     `,
-
   `//#path760
     ctx.beginPath();
     ctx.fillStyle = 'rgb(212, 0, 0)';
@@ -1107,4 +1106,4 @@ export const pathsStringArray = [
     ctx.closePath();
     ctx.fill();
     ctx.stroke();`,
-];
+]
