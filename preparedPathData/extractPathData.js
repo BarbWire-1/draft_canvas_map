@@ -4,14 +4,17 @@ import { pathsStringArray } from './pathsStringArray.js';
 
 let pathsArray = [];
 
+
+// changed to convert single template-string
+// so map over array now!!
 const extractPathData = (code) => {
-	//let pathsArray = []
-    console.log(Array.isArray(code))// WHAAAAAT????
+
+    //console.log(Array.isArray(code))// no, currently string as ITEM
 
         const pathData = {
             id: '',
             name: '',
-
+            fillStyle: '',
             start: { x: 0, y: 0 }, // Initialize start point
             path: [],
         };
@@ -74,21 +77,15 @@ const extractPathData = (code) => {
             }
 
         }
-// but I cannot pass the array itself but need to map over it
-	console.log('Creating a new pathData-array.');
-	pathsArray.push(pathData);
-         // each is COMPLETE!!!!
-
-	console.log({ pathsArray }); // WHAT I WANT!!!!
-    //return { pathData}
-
+    pathsArray.push(pathData);
+     console.log(`Pushing path ${pathsArray.length} to pathData-array.`);
 
 };
 
 let isDownloaded = false;
 // TODO OOOOR directly write the array to pathData dynamically, but that would not be hardcoded!
     function downloadJSON(data, filename = 'convertedPaths.json') {
-        if (isDownloaded) return;
+
 	const jsonString = JSON.stringify(data, null, 2);
 	const blob = new Blob([jsonString], { type: 'application/json' });
 	const link = document.createElement('a');
@@ -100,32 +97,16 @@ let isDownloaded = false;
 	link.click();
 
     document.body.removeChild(link);
-    isDownloaded = true;
+    //isDownloaded = true;
 }
 
 // Call extractPathData for each code snippet
-let data = (extractPathData(pathsStringArray[0]));
+pathsStringArray.map((extractPathData));
 
+//console.log(pathsArray.length)
+//console.log(pathsStringArray.length)
 // Check if pathsArray is not empty and download has not occurred
-if (pathsArray.length > 0 && !isDownloaded) {
+if (!isDownloaded) {
+    isDownloaded = true;
     downloadJSON({ pathsArray });
 }
-
-
-//
-// // Your array of code items
-// const codeArray = [
-//     `//#path616
-//     ctx.fillStyle = 'rgb(0, 128, 128)';
-//     ctx.lineWidth = 0.800000;
-//     ctx.globalAlpha = 1.0;
-//     ctx.strokeStyle = 'rgb(0, 0, 0)';
-//     ctx.moveTo(345.115420, 87.938063);`,
-//     `ctx.fillStyle = 'blue';\nctx.fillRect(70, 10, 50, 50);`,
-//     // ... more code items ...
-// ];
-//
-// // Process each code item and create an array of pathData objects
-// const pathDataArray = codeArray.map(extractPathData);
-//
-// console.log(pathDataArray);

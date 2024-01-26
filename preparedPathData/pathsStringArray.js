@@ -100,8 +100,8 @@ export const pathsStringArray = [
     ctx.lineTo(346.774630, 99.552555);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
-    `,
+    ctx.stroke();`
+    ,
   `//#path557
     ctx.beginPath();
     ctx.fillStyle = 'rgb(0, 255, 0)';
@@ -157,8 +157,7 @@ export const pathsStringArray = [
     ctx.lineTo(378.955790, 286.856630);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
-    `,
+    ctx.stroke();`,
   `//#path760
     ctx.beginPath();
     ctx.fillStyle = 'rgb(212, 0, 0)';
@@ -320,8 +319,7 @@ export const pathsStringArray = [
     ctx.lineTo(365.187500, 282.187500);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
-`,
+    ctx.stroke();`,
   `//#path875
     ctx.beginPath();
     ctx.fillStyle = 'rgb(255, 128, 128)';
@@ -468,8 +466,7 @@ export const pathsStringArray = [
     ctx.lineTo(285.375010, 433.375060);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
-`,
+    ctx.stroke();`,
   `//#path985
     ctx.beginPath();
     ctx.fillStyle = 'rgb(255, 255, 0)';
