@@ -14,7 +14,8 @@ map.addAreas(paths);
 const firstMap = map.areas[0];
 firstMap.fillStyle = "blue";
 firstMap.globalAlpha = 0.3;
-map.areas[0].strokeStyle = "limegreen";
+map.areas[ 0 ].strokeStyle = "limegreen";
+
 map.areas[0].lineWidth = 5;
 
 console.log("Script loaded successfully");
@@ -45,4 +46,3 @@ document.addEventListener("click", (e) => {
       break;
   }
 });
-

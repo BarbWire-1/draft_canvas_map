@@ -6,9 +6,9 @@ export class Area {
 
 		// Loop over keys in pathData and assign them to this
 		for (const key in pathData) {
-			if (pathData.hasOwnProperty(key)) {
+			//if (pathData.hasOwnProperty(key)) {
 				this[key] = pathData[key];
-			}
+			//}
 		}
 		// Init path commands for areas once and store for rerendering
 		this.#pathCommands = this.generatePath();
