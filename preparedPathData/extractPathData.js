@@ -2,24 +2,22 @@
 
 import { pathsStringArray } from './pathsStringArray.js';
 
-let pathsArray = [];
-
-
 // changed to convert single template-string
 // so map over array now!!
-const extractPathData = (code) => {
-
+// for creating single paths the downloadJSON needs to be called with string as arg
+function extractPathData(stringArray) {
+let pathsArray = [];
     //console.log(Array.isArray(code))// no, currently string as ITEM
-
+    for (const code of stringArray) {
         const pathData = {
             id: '',
             name: '',
             fillStyle: '',
-            start: { x: 0, y: 0 }, // Initialize start point
+            start: { x: 0, y: 0 }, // separate moveTo point
             path: [],
         };
 
-        // Use regular expressions to extract relevant information
+        // Use regular expressions to extract relevant data
         const pathIdRegex = /\/\/\s*#(\w+)/;
         const nameRegex = /"name":\s*"(.*?)"/;
         const fillStyleRegex = /ctx\.fillStyle\s*=\s*'(.*?)'/;
@@ -36,7 +34,7 @@ const extractPathData = (code) => {
         const fillStyleMatch = code.match(fillStyleRegex);
         pathData.fillStyle = fillStyleMatch ? fillStyleMatch[ 1 ] : '';
 
-        // Use regular expressions to extract moveTo, lineTo, and bezierCurveTo commands
+        // Use regular expressions to extract moveTo, lineTo, and bezierCurveTo points
         const regex = /ctx\.(moveTo|lineTo|bezierCurveTo)\((.*?)\);/g;
         let match;
 
@@ -77,36 +75,43 @@ const extractPathData = (code) => {
             }
 
         }
-    pathsArray.push(pathData);
-     console.log(`Pushing path ${pathsArray.length} to pathData-array.`);
+        pathsArray.push(pathData);
+        console.log(`Pushing path ${pathsArray.length} to pathData-array.`);
+    }
+    return {pathsArray}
 
 };
 
-let isDownloaded = false;
-// TODO OOOOR directly write the array to pathData dynamically, but that would not be hardcoded!
-    function downloadJSON(data, filename = 'convertedPaths.json') {
 
-	const jsonString = JSON.stringify(data, null, 2);
-	const blob = new Blob([jsonString], { type: 'application/json' });
-	const link = document.createElement('a');
 
-	link.href = URL.createObjectURL(blob);
-	link.download = filename;
-	document.body.appendChild(link);
+//let isDownloaded = false;
 
-	link.click();
+function downloadJSON(data, filename = 'convertedPaths.json') {
+    // if (isDownloaded) {
+    //     console.log("already downloaded this file");
+    //     return; // Do not download again
+    // }
 
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const link = document.createElement('a');
+
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+
+    document.body.appendChild(link);
+
+    link.click();
     document.body.removeChild(link);
-    //isDownloaded = true;
+
+    //isDownloaded = true; // Set to true after the download
 }
 
-// Call extractPathData for each code snippet
-pathsStringArray.map((extractPathData));
+const dataWithComment = {
+    "_COMMENT": "For now copy the array into map/convertedPaths.js to use the hardcoded values. Only generate when changing or adding paths",
+    "pathsData": extractPathData(pathsStringArray)
+};
 
-//console.log(pathsArray.length)
-//console.log(pathsStringArray.length)
-// Check if pathsArray is not empty and download has not occurred
-if (!isDownloaded) {
-    isDownloaded = true;
-    downloadJSON({ pathsArray });
+export function createNewJSON() {
+    downloadJSON(dataWithComment);
 }

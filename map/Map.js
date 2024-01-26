@@ -8,11 +8,7 @@ export class TheMap {
 		this.areas = [];
 
 		this.isAnimatedId = null;
-        this.setupClickListener();
-
-        //console.log(this.areas)
-		//this.startAnimation();
-		//this.redrawAreas();
+		this.setupClickListener();
 	}
 
 	addAreas(pathsData) {
@@ -22,14 +18,10 @@ export class TheMap {
 		});
 	}
 
-    redrawAreas() {
-
-        let count = 0;
-        this.areas.forEach((area) => {
-            count++;
-            area.renderPath();
-        });
-        //console.log(count)
+	redrawMap() {
+		this.areas.forEach((area) => {
+			area.renderPath();
+		});
 	}
 
 	//ANIMATION
@@ -46,21 +38,20 @@ export class TheMap {
 		}
 	}
 
-    updateMap() {
-        const { width, height } = this.ctx.canvas;
-        this.ctx.clearRect(0, 0, width, height);
-        //console.log('animating');
-		this.redrawAreas();
-    }
-    
-    // Perform any animations or updates here - could rather be in another class controlling the entire game later
-	animate() {
+	updateMap() {
+		const { width, height } = this.ctx.canvas;
+		this.ctx.clearRect(0, 0, width, height);
+		//console.log('animating');
+		this.redrawMap();
+	}
 
-        this.updateMap()
+	// Perform any animations or updates here - could rather be in another class controlling the entire game later
+	animate() {
+		this.updateMap();
 		this.animationId = requestAnimationFrame(() => this.animate());
 	}
 
-    // LISTENER AND HANDLER
+	// LISTENER AND HANDLER
 	setupClickListener() {
 		this.canvas.addEventListener('click', (event) => {
 			const mouseX =
@@ -70,22 +61,16 @@ export class TheMap {
 
 			// Check if the click is inside any of the areas
 			this.areas.forEach((area, index) => {
-				if (this.isPointInsideArea(mouseX, mouseY, area)) {
+				if (area.isPointInsideArea(mouseX, mouseY, area)) {
 					this.clickHandler(index, area);
-
 				}
 			});
 		});
 	}
 
-    isPointInsideArea(x, y, area) {
-    // Use the stored pathCommands
-    return this.ctx.isPointInPath(area.pathCommands, x, y);
-}
-
-
 	clickHandler(index, area) {
-		area.isClicked = true;
+        area.isClicked = true;
+        // do whatever with the area
 		console.log(`Clicked inside area ${index + 1}: ${area.id}`);
 	}
 }
