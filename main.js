@@ -46,8 +46,3 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/*
-Hi Stefan have a look at preparedPathData/extractPathData.js
-at the bottom I wrote a short description. Hope this helps. Greets. Barb.
-In general I changed some stuff, I removed eg common properties from the data-object. They still can be changed dynamically later. Some changes might only apply on redraw, which would happen in the animation (requestAnimationFrame) I added. You will need it later anyways for your game.
-*/
