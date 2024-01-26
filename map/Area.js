@@ -1,5 +1,5 @@
 export class Area {
-    #pathCommands
+	#pathCommands;
 	constructor(ctx, pathData, mapInstance) {
 		this.ctx = ctx;
 		this.mapInstance = mapInstance;
@@ -10,7 +10,7 @@ export class Area {
 				this[key] = pathData[key];
 			}
 		}
-		// Init path commands for areas
+		// Init path commands for areas once and store for rerendering
 		this.#pathCommands = this.generatePath();
 
 		// other props
@@ -48,10 +48,10 @@ export class Area {
 			});
 		}
 
-        // points from pathData.path
+		// points from pathData.path
 		Object.freeze(this.path);
 
-        // first static draw
+		// first static draw
 		this.renderPath();
 	}
 
@@ -77,8 +77,8 @@ export class Area {
 		}
 		//console.log("Generated path "+ this.id)
 		path.closePath();
-        // Store the generated path in pathCommands property
-        // for reuse
+		// Store the generated path in pathCommands property
+		// for reuse
 		this.#pathCommands = path;
 
 		return this.#pathCommands;
@@ -95,10 +95,9 @@ export class Area {
 		// use the stored pathCommands
 		this.ctx.fill(this.#pathCommands);
 		this.ctx.stroke(this.#pathCommands);
-    }
+	}
 
-    isPointInsideArea(x, y, area) {
-    return this.ctx.isPointInPath(area.#pathCommands, x, y);
-}
-
+	isPointInsideArea(x, y, area) {
+		return this.ctx.isPointInPath(area.#pathCommands, x, y);
+	}
 }

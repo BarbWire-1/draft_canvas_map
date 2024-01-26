@@ -1,9 +1,12 @@
 import { TheMap } from "./map/Map.js";
 import { paths } from "./map/convertedPaths.js";
 
-import { createNewJSON } from './preparedPathData/extractPathData.js';
-createNewJSON(); // WHY does this trigger the download again and again ?
 
+/* Run these both commands to create a new JSON form pathsStringsArray. do NOT download into the projectFolder to NOT trigger a reload. Then comment out again.
+*/
+
+//import { createNewJSON } from './preparedPathData/extractPathData.js';
+//createNewJSON();
 
 const map = new TheMap("canvas", 1800, 1800);
 map.addAreas(paths);
