@@ -7,7 +7,8 @@ export class TheMap {
 		this.canvas.height = height;
 		this.areas = [];
 
-		this.isAnimatedId = null;
+        this.isAnimatedId = null;
+        this.updateMap();
 		this.setupClickListener();
 	}
 

@@ -8,12 +8,14 @@ import { paths } from "./map/convertedPaths.js";
 //import { createNewJSON } from './preparedPathData/extractPathData.js';
 //createNewJSON();
 
+
+
 const map = new TheMap("canvas", 1800, 1800);
 map.addAreas(paths);
 
 const firstMap = map.areas[0];
-firstMap.fillStyle = "blue";
-firstMap.globalAlpha = 0.3;
+firstMap.fillStyle = "violet";
+firstMap.globalAlpha = 0.1;
 map.areas[ 0 ].strokeStyle = "limegreen";
 
 map.areas[0].lineWidth = 5;
@@ -33,13 +35,13 @@ function stopAnimation() {
 }
 
 document.addEventListener("click", (e) => {
-  const buttons = document.getElementsByTagName("button");
 
-  switch (e.target) {
-    case buttons[0]:
+
+  switch (e.target.id) {
+    case "startButton":
       startAnimation();
       break;
-    case buttons[1]:
+    case "stopButton":
       stopAnimation();
       break;
     default:

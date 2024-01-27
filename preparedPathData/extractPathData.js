@@ -8,7 +8,7 @@ import { pathsStringArray } from './pathsStringArray.js';
 function extractPathData(stringArray) {
 let pathsArray = [];
     //console.log(Array.isArray(code))// no, currently string as ITEM
-    for (const code of stringArray) {
+    for (const pathCommands of stringArray) {
         const pathData = {
             id: '',
             name: '',
@@ -23,22 +23,22 @@ let pathsArray = [];
         const fillStyleRegex = /ctx\.fillStyle\s*=\s*'(.*?)'/;
 
         // Extract pathId
-        const pathIdMatch = code.match(pathIdRegex);
+        const pathIdMatch = pathCommands.match(pathIdRegex);
         pathData.id = pathIdMatch ? `#${pathIdMatch[ 1 ]}` : '';
 
         // Extract name
-        const nameMatch = code.match(nameRegex);
+        const nameMatch = pathCommands.match(nameRegex);
         pathData.name = nameMatch ? nameMatch[ 1 ] : '';
 
         // Extract fillStyle
-        const fillStyleMatch = code.match(fillStyleRegex);
+        const fillStyleMatch = pathCommands.match(fillStyleRegex);
         pathData.fillStyle = fillStyleMatch ? fillStyleMatch[ 1 ] : '';
 
         // Use regular expressions to extract moveTo, lineTo, and bezierCurveTo points
         const regex = /ctx\.(moveTo|lineTo|bezierCurveTo)\((.*?)\);/g;
         let match;
 
-        while ((match = regex.exec(code)) !== null) {
+        while ((match = regex.exec(pathCommands)) !== null) {
             const [ _, command, args ] = match;
 
             switch (command) {

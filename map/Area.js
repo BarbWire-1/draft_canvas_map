@@ -13,14 +13,13 @@ export class Area {
 		// Init path commands for areas once and store for rerendering
 		this.#pathCommands = this.generatePath();
 
-		// other props
+		// common properties
 		this.globalAlpha = 1;
 		this.strokeStyle = '#000000';
 		this.lineWidth = 0.8;
 		this.isClicked = false; // for whatever this could be useful later...
 
 		const reactiveKeys = [
-			'fillStyle',
 			'strokeStyle',
 			'lineWidth',
 			'globalAlpha',
@@ -41,7 +40,7 @@ export class Area {
 					if (this[key] === newValue) return;
 					value = newValue;
 					//console.log(`Set ${value} for ${key}`);
-					this.renderPath();
+					key === "globalAlpha" ? this.mapInstance.updateMap() :this.renderPath();
 				},
 				enumerable: true,
 				configurable: true,
