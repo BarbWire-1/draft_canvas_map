@@ -9,7 +9,7 @@ function extractPathData(stringArray) {
 let pathsArray = [];
     //console.log(Array.isArray(code))// no, currently string as ITEM
     for (const pathCommands of stringArray) {
-        const pathData = {
+        const path = {
             id: '',
             name: '',
             fillStyle: '',
@@ -24,15 +24,15 @@ let pathsArray = [];
 
         // Extract pathId
         const pathIdMatch = pathCommands.match(pathIdRegex);
-        pathData.id = pathIdMatch ? `#${pathIdMatch[ 1 ]}` : '';
+        path.id = pathIdMatch ? `#${pathIdMatch[ 1 ]}` : '';
 
         // Extract name
         const nameMatch = pathCommands.match(nameRegex);
-        pathData.name = nameMatch ? nameMatch[ 1 ] : '';
+        path.name = nameMatch ? nameMatch[ 1 ] : '';
 
         // Extract fillStyle
         const fillStyleMatch = pathCommands.match(fillStyleRegex);
-        pathData.fillStyle = fillStyleMatch ? fillStyleMatch[ 1 ] : '';
+        path.fillStyle = fillStyleMatch ? fillStyleMatch[ 1 ] : '';
 
         // Use regular expressions to extract moveTo, lineTo, and bezierCurveTo points
         const regex = /ctx\.(moveTo|lineTo|bezierCurveTo)\((.*?)\);/g;
@@ -45,13 +45,13 @@ let pathsArray = [];
                 case 'moveTo':
                     // Extract x and y coordinates from the arguments
                     const [ moveToX, moveToY ] = args.split(',').map(Number);
-                    pathData.start = { x: moveToX, y: moveToY };
+                    path.start = { x: moveToX, y: moveToY };
                     break;
 
                 case 'lineTo':
                     // Extract x and y coordinates from the arguments
                     const [ lineToX, lineToY ] = args.split(',').map(Number);
-                    pathData.path.push({ x: lineToX, y: lineToY });
+                    path.path.push({ x: lineToX, y: lineToY });
                     break;
 
                 case 'bezierCurveTo':
@@ -64,7 +64,7 @@ let pathsArray = [];
                         controlPoints.push({ x: cpX, y: cpY });
                     }
 
-                    pathData.path.push({ type: 'bezier', controlPoints });
+                    path.path.push({ type: 'bezier', controlPoints });
                     break;
 
                 default:
@@ -75,8 +75,8 @@ let pathsArray = [];
             }
 
         }
-        pathsArray.push(pathData);
-        console.log(`Pushing path ${pathsArray.length} to pathData-array.`);
+        pathsArray.push(path);
+        console.log(`Pushing path ${pathsArray.length} to pathsArray.`);
     }
     return {pathsArray}
 

@@ -14,8 +14,8 @@ const map = new TheMap("canvas", 1800, 1800);
 map.addAreas(paths);
 
 const firstMap = map.areas[0];
-firstMap.fillStyle = "violet";
-firstMap.globalAlpha = 0.1;
+firstMap.fillStyle = "white";
+firstMap.globalAlpha = .1;
 map.areas[ 0 ].strokeStyle = "limegreen";
 
 map.areas[0].lineWidth = 5;
